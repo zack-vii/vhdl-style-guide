@@ -127,6 +127,7 @@ class multiline_alignment_between_tokens(alignment.Rule):
 
             iFirstTokenLength = len(lTokens[0].get_value())
 
+            dExpectedIndent = dActualIndent
             if self.align_paren == 'no' and self.align_left == 'yes':
                 dExpectedIndent = _analyze_align_left_yes_align_paren_no(iFirstLine, iLastLine, lParens, self.indentSize, dActualIndent, bStartsWithParen, self.bIgnoreStartParen, self.override)
             if self.align_paren == 'yes' and self.align_left == 'no':
