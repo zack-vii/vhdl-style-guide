@@ -419,7 +419,7 @@ def print_error_message(sToken, token, iToken, lObjects):
     sModuleName = extract_module_name(token)
 
     sErrorMessage = '\n'
-    sErrorMessage += f'Error: Unexpected token detected while parsing {sModuleName} @ Line {iLine}, Column {iColumn} in file {lObjects[0].get_filename()}'
+    sErrorMessage += f'Error: Unexpected token detected while parsing {sModuleName} @ Line {iLine}, Column {iColumn} in file {lObjects.filename}'
     sErrorMessage += '\n'
     sErrorMessage += f'       Expecting : {sToken}'
     sErrorMessage += '\n'

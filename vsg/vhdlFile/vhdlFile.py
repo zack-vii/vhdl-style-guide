@@ -39,6 +39,11 @@ from vsg.token_map import process_tokens
 from vsg.vhdlFile import code_tags
 
 
+class Objects(list):
+    filename: str
+    def __init__(self, *a, filename: str, **kw):
+        self.filename = filename
+
 class vhdlFile():
     '''
     Holds contents of a VHDL file.
@@ -58,7 +63,7 @@ class vhdlFile():
         self.filecontent = filecontent
         self.hasArchitecture = False
         self.hasEntity = False
-        self.lAllObjects = []
+        self.lAllObjects = Objects(filename=sFilename)
         self.filename = sFilename
         self.dIndentMap = None
         self.lOpenPragmas = ['--vhdl_comp_off']
@@ -72,7 +77,6 @@ class vhdlFile():
     def _processFile(self):
 
         oOptions = options()
-        self.lAllObjects = []
         for sLine in self.filecontent:
             lTokens = tokens.create(sLine.rstrip('\n').rstrip('\r'))
             lObjects = []
@@ -87,11 +91,6 @@ class vhdlFile():
 
             self.lAllObjects.extend(lObjects)
             self.lAllObjects.append(parser.carriage_return())
-
-        try:
-            self.lAllObjects[0].set_filename(self.filename)
-        except IndexError:
-            pass
 
         design_file.tokenize(self.lAllObjects)
         post_token_assignments(self.lAllObjects)

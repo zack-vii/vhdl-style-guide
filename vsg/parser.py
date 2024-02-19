@@ -16,7 +16,6 @@ class item():
         self.context = []
         self.code_tags = []
         self.base_token, self.sub_token = self.update_token_types()
-        self.filename = None
 
     def update_token_types(self):
         try:
@@ -84,12 +83,6 @@ class item():
 
     def get_sub_token(self):
         return self.sub_token
-
-    def set_filename(self, sFilename):
-        self.filename = sFilename
-
-    def get_filename(self):
-        return self.filename
 
 
 class todo(item):
